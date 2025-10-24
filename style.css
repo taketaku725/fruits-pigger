@@ -1,0 +1,328 @@
+html, body {
+  margin: 0; padding: 0; height: 100%;
+  background: linear-gradient(to bottom, #ffe9ec, #c7f5ff);
+  font-family: "Rounded Mplus 1c", sans-serif;
+  color: #444; text-align: center;
+  overflow: hidden;
+}
+
+#gameContainer {
+  height: 100%;
+  display: flex; justify-content: center; align-items: center;
+}
+
+#titleScreen {
+  position: relative;
+  overflow: hidden;
+  justify-content: flex-start; /* ← 上寄せ */
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  padding-top: 6vh; /* ← 全体を少し上げる */
+  background: linear-gradient(to bottom, #ffe9ec, #c7f5ff);
+}
+
+.title-buttons {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 0; /* ← 不要な下方向の余白を削除 */
+}
+
+/* 背景アニメーション層 */
+#titleBackgroundAnim {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* 🍎 りんご（左上→ぶたさんの前） */
+#bgApple {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  width: 64px;
+  opacity: 0;
+  animation: bgAppleFall 2.5s ease-in-out 1.2s forwards;
+}
+
+/* 🍎 りんご（ぶたさんの前） */
+#bgApple {
+  position: absolute;
+  top: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  opacity: 0;
+  z-index: 2; /* ← 前面に出す！ */
+  animation: bgAppleFall 2.5s ease-in-out 1.2s forwards;
+}
+
+/* 🐷 ぶたさん（上に移動） */
+#bgPig {
+  position: absolute;
+  bottom: 30vh;
+  left: calc(50% - 60px); /* ← 中央基準（画像幅120pxの半分） */
+  width: 120px;
+  opacity: 0;
+  z-index: 1; /* ← 背景層に */
+  animation: bgPigPop 0.8s ease-out 2.5s forwards;
+}
+
+
+
+
+@keyframes bgAppleFall {
+  0% {
+    top: -80px;
+    opacity: 0;
+    transform: translateX(-50%) rotate(-10deg);
+  }
+  15% {
+    opacity: 1;
+  }
+  60% {
+    transform: translateX(-50%) rotate(8deg);
+  }
+  80% {
+    top: calc(100% - 320px);
+    transform: translateX(-50%) rotate(-5deg);
+  }
+  90% {
+    top: calc(100% - 280px);
+    opacity: 1;
+    transform: translateX(-50%) rotate(0deg);
+  }
+  100% {
+    top: calc(100% - 260px);
+    opacity: 0; /* ← キャッチで消える */
+  }
+}
+
+/* 🐷 登場アニメーション */
+@keyframes bgPigPop {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+#gameLogo {
+  width: min(80%, 340px);
+  height: auto;
+  margin-top: -50px;
+  margin-bottom: 100px; /* ← ボタンとの間隔を少し詰める */
+  opacity: 0;
+  transform: scale(0.7) rotate(-3deg);
+  animation: popIn 0.8s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) rotate(-3deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) rotate(2deg);
+  }
+  80% {
+    transform: scale(0.95) rotate(-1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+.title-buttons button {
+  background: #ffb8c6;
+  border: none;
+  padding: 10px 26px;
+  border-radius: 24px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s;
+  width: 180px;
+}
+
+.title-buttons button:hover {
+  background: #ffa1b3;
+  transform: translateY(-2px);
+}
+
+
+.screen {
+  display: none;
+  flex-direction: column; justify-content: center; align-items: center;
+  width: 100%; height: 100%;
+}
+.screen.active { display: flex; }
+
+h1, h2 { color: #ff7da3; margin: 10px 0; }
+p { margin: 5px; }
+
+canvas {
+  background: #fff9f9;
+  border: 3px solid #ffd6e0; border-radius: 12px;
+  touch-action: none;
+  max-width: 90vw; max-height: 65vh;
+}
+
+.ui {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+button {
+  background: #ffb8c6;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+button:hover { background: #ffa1b3; }
+.buttonGroup { display: flex; flex-direction: column; gap: 10px; }
+
+ol {
+  list-style: none;
+  text-align: center;
+  background: rgba(255,255,255,0.85);
+  border-radius: 16px;
+  padding: 20px;
+  width: 240px;
+  box-shadow: 0 0 8px rgba(255,150,180,0.3);
+}
+ol li {
+  margin: 8px 0;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: #ffeef4;
+}
+ol li:nth-child(1){ background: linear-gradient(to right,#fff6b3,#ffeb99); font-weight:bold; color:#c07a00; }
+ol li:nth-child(2){ background: linear-gradient(to right,#f0f0f0,#dddddd); font-weight:bold; color:#777; }
+ol li:nth-child(3){ background: linear-gradient(to right,#ffd6b3,#ffc4a3); font-weight:bold; color:#a14a00; }
+
+.howto-box {
+  background: rgba(255,255,255,0.9);
+  border-radius: 16px;
+  padding: 20px;
+  width: 80%;
+  max-width: 340px;
+  box-shadow: 0 0 10px rgba(255,150,180,0.2);
+  text-align: center;
+}
+
+.item-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;                /* ← 少し詰める（24→18） */
+  margin: 16px auto;
+}
+
+.icon-column,
+.text-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;                 /* ← アイテム間の縦の余白を詰める（10→6） */
+}
+
+.item-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+}
+
+.text-column span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #555;
+  height: 33px;             /* ← アイコンと高さを完全一致 */
+  line-height: 33px;        /* ← 行間もピッタリ合わせる */
+}
+
+.startPlayButton {
+  margin-top: 24px;
+  background: #ffb8c6;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-size: 17px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.startPlayButton:hover {
+  background: #ffa1b3;
+}
+
+.item-row {
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: 6px; margin: 10px 0;
+}
+.item-row div {
+  display: flex; align-items: center;
+  gap: 8px; font-size: 15px;
+}
+.item-icon { width: 32px; height: 32px; }
+
+.countdown {
+  position: absolute; top: 45%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 60px; font-weight: bold;
+  color: #ff6fa8; text-shadow: 2px 2px 6px white;
+  white-space: nowrap; display: none;
+}
+
+/* 残り時間＋演出 */
+#timeEffect {
+  display: inline-block;
+  font-weight: bold;
+  color: #ffcc33;
+  font-size: 18px;
+  margin-left: 6px;
+  opacity: 0;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.6s ease;
+}
+#timeEffect.active {
+  opacity: 1;
+  transform: translateY(-10px);
+}
+
+/* フィーバー背景 */
+body.fever {
+  animation: feverFlash 1s infinite alternate ease-in-out;
+}
+@keyframes feverFlash {
+  0% { background: linear-gradient(135deg,#fff6b3,#ffd1f7,#c7f5ff); }
+  50%{ background: linear-gradient(135deg,#fff5cc,#ffc9ec,#b3f0ff); }
+  100%{background: linear-gradient(135deg,#ffeb99,#ffb3f9,#99e1ff); }
+}
