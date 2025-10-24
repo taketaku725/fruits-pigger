@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== 果物タイプ =====
   const fruitTypes = [
-    { name:"apple", score:1, weight:1.0, speed:[3.0,4.2], hitScale:0.7, img:imgApple, bomb:false, gold:false },
+    { name:"apple", score:99999999, weight:1.0, speed:[3.0,4.2], hitScale:0.7, img:imgApple, bomb:false, gold:false },
     { name:"banana", score:2, weight:0.7, speed:[3.6,4.8], hitScale:0.7, img:imgBanana, bomb:false, gold:false },
     { name:"strawberry", score:3, weight:0.4, speed:[4.2,5.5], hitScale:0.7, img:imgStraw, bomb:false, gold:false },
     { name:"goldapple", score:1, weight:0.01, speed:[5.2,6.0], hitScale:0.7, img:imgGold, bomb:false, gold:true },
