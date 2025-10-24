@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+  <title>ぶたさんのくだものキャッチ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="gameContainer">
+
+    <!-- タイトル -->
+    <div id="titleScreen" class="screen active">
+      <div id="titleBackgroundAnim">
+        <img src="images/apple.png" id="bgApple" alt="落ちるりんご">
+        <img src="images/pig.png" id="bgPig" alt="ぶたさん">
+      </div>
+    
+      <img src="images/logo.png" alt="ぶたさんのくだものキャッチ ロゴ" id="gameLogo">
+    
+      <div class="buttonGroup title-buttons">
+        <button id="startButton">スタート</button>
+        <button id="showRankingFromTitle">ランキング</button>
+      </div>
+    </div>
+
+    <!-- あそびかた -->
+    <div id="howToPlayScreen" class="screen">
+      <h2>🐷 あそびかた 🍓</h2>
+      <div class="howto-box">
+        <p>
+          ぶたさんを左右に動かして<br>
+          果物をキャッチしよう！
+        </p>
+
+        <div class="item-layout">
+          <div class="icon-column">
+            <img src="images/apple.png" class="item-icon">
+            <img src="images/banana.png" class="item-icon">
+            <img src="images/strawberry.png" class="item-icon">
+            <img src="images/bomb.png" class="item-icon">
+            <img src="images/goldapple.png" class="item-icon">
+          </div>
+
+          <div class="text-column">
+            <span>1点</span>
+            <span>2点</span>
+            <span>3点</span>
+            <span>−3点</span>
+            <span>フィーバー！</span>
+          </div>
+        </div>
+
+        <p>時間が0になるとゲーム終了だよ！</p>
+      </div>
+
+      <button id="startGameFromHowTo" class="startPlayButton">はじめる</button>
+    </div>
+
+
+    <!-- ゲーム -->
+    <div id="gameScreen" class="screen">
+      <canvas id="gameCanvas"></canvas>
+      <div class="ui">
+        <p id="score">スコア: 0</p>
+        <p id="time">残り時間: 30 <span id="timeEffect"></span></p>
+      </div>
+      <div id="countdown" class="countdown"></div>
+    </div>
+
+    <!-- リザルト -->
+    <div id="resultScreen" class="screen">
+      <h2>🐷 リザルト 🍎</h2>
+      <p id="finalScore">スコア: 0</p>
+      <p id="rankText"></p>
+      <p id="highScoreText"></p>
+      <p id="newRecordText" style="color:#ff4f6f;font-weight:bold;"></p>
+      <div class="buttonGroup">
+        <button id="retryButton">もう一度あそぶ</button>
+        <button id="backToTitle">タイトルへ戻る</button>
+        <button id="showRankingFromResult">ランキングを見る</button>
+      </div>
+    </div>
+
+    <!-- ランキング -->
+    <div id="rankingScreen" class="screen">
+      <h2>🏆 ランキング 🏆</h2>
+      <ol id="rankingList"></ol>
+      <button id="backToTitleFromRanking">タイトルへ戻る</button>
+    </div>
+
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
